@@ -1,0 +1,17 @@
+version: "3"
+services:
+  flask-xray-app:
+    build:
+      context: ./flask-xray-app
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    volumes:
+      - ./flask-xray-app:/app
+    container_name: flask-xray-app
+
+  xray:
+    image: amazon/aws-xray-daemon
+    ports:
+      - "2000:2000/udp"
+    container_name: xray
